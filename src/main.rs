@@ -22,7 +22,7 @@ fn validate_grading_system() {
 
 /// Calculate the grade
 fn calculate_grade(carrots: i32, nuts: i32, seeds: i32) -> i32 {
-    todo!()
+    (carrots + nuts) * (carrots + nuts + seeds)
 }
 
 /// Validate the safety system
@@ -49,7 +49,7 @@ fn calculate_safety_status(
     has_carrot: bool,
     friends_nearby: i32,
 ) -> bool {
-    todo!()
+    (!wolves_nearby && day_time) || has_carrot || friends_nearby > 3
 }
 
 /// Validate the simulation
@@ -67,7 +67,32 @@ fn validate_simulation() {
 
 /// Simulate the rabbit population
 fn simulate(starting_rabbits: i128) -> i32 {
-    todo!()
+    /*  Every day, there are two options.
+       If there is an odd number of rabbits, then the rabbits "multiply like wild", specifically by three.
+       Then one more rabbit shows up. Specifically, there will be (3 * rabbits) + 1 rabbits the next day.
+
+    On the other hand, if there is an even number of rabbits,
+    then that's the perfect number for the wolves to eat!
+    The next day, there will be half as many rabbits.
+    Specifically, there will be rabbits / 2 rabbits the next day.
+
+    This function should return the number of days that pass before there is only one rabbit left. */
+
+    let mut days = 0;
+    let mut rabbits = starting_rabbits;
+
+    loop {
+        //start with even or odd
+        if rabbits == 1 {
+            return days;
+        } else if rabbits % 2 == 1 {
+            rabbits = (rabbits * 3) + 1;
+            days += 1;
+        } else if rabbits % 2 == 0 {
+            rabbits /= 2;
+            days += 1;
+        }
+    }
 }
 
 #[cfg(test)]
